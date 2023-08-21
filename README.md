@@ -32,6 +32,7 @@ Download flowers image data from [here](https://www.kaggle.com/datasets/olgabeli
 │       ├── 00_002.png
 │       ├── 00_003.png
 |       ...
+├── label_names.txt
 ├── notebook.ipynb
 └── requirements.txt
 
