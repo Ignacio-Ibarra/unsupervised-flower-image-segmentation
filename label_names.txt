@@ -1,0 +1,11 @@
+label,name
+0,phlox
+1,rose
+2,calendula
+3,iris
+4,leucanthemum maximum (Shasta daisy)
+5,campanula (bellflower)
+6,viola
+7,rudbeckia laciniata (Goldquelle)
+8,peony
+9,aquilegia
