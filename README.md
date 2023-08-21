@@ -15,7 +15,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 ```
-Download flowers image data from [here](https://www.kaggle.com/datasets/olgabelitskaya/flower-color-images?resource=download) and store them in an `input`, resulting in the following directory structure: 
+Download flowers image data from [here](https://www.kaggle.com/datasets/olgabelitskaya/flower-color-images?resource=download) and store them in an `input` folder, resulting in the following directory structure: 
 
 ```
 .
