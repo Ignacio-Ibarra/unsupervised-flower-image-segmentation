@@ -6,9 +6,9 @@ git clone https://github.com/Ignacio-Ibarra/unsupervised-flower-image-segmentati
 
 cd unsupervised-flower-image-segmentation
 
-python3 -m venv <some_venv_name>
+python3 -m venv <venv_name>
 
-source some_venv_name/bin/activate
+source venv_name/bin/activate
 
 pip install --upgrade pip
 
