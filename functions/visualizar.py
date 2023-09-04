@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-
+from sklearn.cluster import KMeans
 
 images_folder = "./input/flower_images/"
 
@@ -85,3 +85,21 @@ def muestreo_categorias(label_names, muestra=4, images_folder=images_folder):
     plt.show()
     plt.close(fig)
     return None
+
+def reduce_color(image_array, n_clusters): 
+    # Paso a BGR a RGB
+    image_array = imagen_color = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
+    
+    # Aplana el array tridimensional a una matriz bidimensional (128*128, 3)
+    flattened_image = image_array.reshape((-1, 3))
+
+    kmeans = KMeans(n_clusters=4)
+    kmeans.fit(flattened_image)
+    centroides = kmeans.cluster_centers_.astype(int)
+    labels = kmeans.labels_
+
+    # Imputo centroide para cada pixel. 
+    X_reduced = np.array([centroides[i] for i in labels])
+
+    # Devuelvo en tridimensional
+    return X_reduced.reshape(128,128,3)  
