@@ -2,3 +2,4 @@ input/
 *.csv
 *.png
 .venv/
+functions/__pycache__
