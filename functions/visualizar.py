@@ -92,7 +92,7 @@ def muestreo_categorias(label_names, muestra=4, images_folder=images_folder):
 
 def reduce_color(image_array, n_clusters): 
     # Paso a BGR a RGB
-    image_array = imagen_color = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
+    image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
     
     # Aplana el array tridimensional a una matriz bidimensional (128*128, 3)
     flattened_image = image_array.reshape((-1, 3))
