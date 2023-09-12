@@ -3,3 +3,4 @@ input/
 *.png
 .venv/
 functions/__pycache__
+.ipynb_checkpoints/

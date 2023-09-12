@@ -68,7 +68,29 @@ def tomar_muestra(label_names, muestra=4):
                       )
     return flowers_sample
 
-def muestreo_categorias(label_names, muestra=4, images_folder=images_folder):
+def muestreo_categorias_inicial(label_names, images_folder=images_folder, save_path=None):
+    
+    flowers_sample = tomar_muestra(label_names=label_names, muestra=1).reshape(2,5)
+
+    fig, axs = plt.subplots(ncols=5, nrows=2, figsize=(20,8))
+    for i in range(2):
+        for j in range(5):
+            x = flowers_sample[i, j]
+            path = images_folder+x['file']
+            name = x['name']
+            img = cv2.imread(filename=path)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            axs[i, j].imshow(img)
+            axs[i, j].set_title(name)
+            axs[i, j].axis('off')
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path)
+    plt.show()
+    plt.close(fig)
+    return None
+
+def muestreo_categorias(label_names, muestra=4, images_folder=images_folder, save_path=None):
     N = label_names.name.nunique()
     M = muestra
     flowers_sample = tomar_muestra(label_names=label_names, muestra=M)
@@ -84,15 +106,17 @@ def muestreo_categorias(label_names, muestra=4, images_folder=images_folder):
             axs[i, j].imshow(img)
             axs[i, j].set_title(name)
             axs[i, j].axis('off')
-
+    
     plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path)
     plt.show()
     plt.close(fig)
     return None
 
 def reduce_color(image_array, n_clusters): 
     # Paso a BGR a RGB
-    image_array = imagen_color = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
+    image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
     
     # Aplana el array tridimensional a una matriz bidimensional (128*128, 3)
     flattened_image = image_array.reshape((-1, 3))
