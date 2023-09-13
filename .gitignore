@@ -2,3 +2,6 @@ input/
 *.csv
 *.png
 .venv/
+functions/__pycache__
+.ipynb_checkpoints/
+output/
