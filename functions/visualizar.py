@@ -137,3 +137,85 @@ def img_to_numpy(path):
     img = cv2.imread(filename=path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     return img
+
+def divido_y_mezclo(imagen_color, divisiones):
+    if divisiones not in [1, 2, 4, 8, 16, 32, 64, 128]:
+        print('Solo se aceptan como valores los divisores enteros de 128')
+        print('1, 2, 4, 8, 16, 32, 64 o 128')
+        return None
+        
+    imagen_color2 = imagen_color.copy()
+    lista_partes=[]
+    tamaño_parte = int(128/divisiones)
+    for i in range(divisiones):
+        for j in range(divisiones):
+            x = i*tamaño_parte
+            y = j*tamaño_parte
+            lista_partes.append(imagen_color2[x:x+tamaño_parte, y:y+tamaño_parte, :].copy()) #faltaba el copy y entonces reasignaba de manera loca
+
+    random.shuffle(lista_partes)
+    select_lista = 0
+    
+    for i in range(divisiones):
+        for j in range(divisiones):
+            x = i*tamaño_parte
+            y = j*tamaño_parte
+            
+            imagen_color2[x:x+tamaño_parte, y:y+tamaño_parte, :] = lista_partes[select_lista]
+            select_lista = select_lista + 1
+    
+    plt.imshow(imagen_color2)
+    return None
+
+
+def divido_dos_y_mezclo(imagen_color, imagen_dos, divisiones):
+    if divisiones not in [1, 2, 4, 8, 16, 32, 64, 128]:
+        print('Solo se aceptan como valores los divisores enteros de 128')
+        print('1, 2, 4, 8, 16, 32, 64 o 128')
+        return None
+        
+    imagen_color2 = imagen_color.copy()
+    lista_partes=[]
+    tamaño_parte = int(128/divisiones)
+    for i in range(divisiones):
+        for j in range(divisiones):
+            x = i*tamaño_parte
+            y = j*tamaño_parte
+            lista_partes.append(imagen_color2[x:x+tamaño_parte, y:y+tamaño_parte, :].copy()) #faltaba el copy y entonces reasignaba de manera loca
+    
+    imagen_color3 = imagen_dos.copy()
+    lista_partes_dos=[]
+    tamaño_parte = int(128/divisiones)
+    for i in range(divisiones):
+        for j in range(divisiones):
+            x = i*tamaño_parte
+            y = j*tamaño_parte
+            lista_partes_dos.append(imagen_color3[x:x+tamaño_parte, y:y+tamaño_parte, :].copy()) #faltaba el copy y entonces reasignaba de manera loca
+
+    
+    lista_uno = random.sample(lista_partes, int((divisiones*divisiones)/2))
+    lista_dos = random.sample(lista_partes_dos, int((divisiones*divisiones)/2))
+    lista_combinada = lista_uno + lista_dos
+    random.shuffle(lista_combinada)
+    select_lista = 0
+    
+    for i in range(divisiones):
+        for j in range(divisiones):
+            x = i*tamaño_parte
+            y = j*tamaño_parte
+            
+            imagen_color2[x:x+tamaño_parte, y:y+tamaño_parte, :] = lista_combinada[select_lista]
+            select_lista = select_lista + 1
+    
+    plt.imshow(imagen_color2)
+    return None
+
+def change_brightness(img, value=0):
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    v = cv2.add(v,value)
+    v[v > 255] = 255
+    v[v < 0] = 0
+    final_hsv = cv2.merge((h, s, v))
+    img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
+    return img
