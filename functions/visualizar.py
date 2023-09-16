@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
+import random
+
 
 images_folder = "./input/flower_images/"
 
