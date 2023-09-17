@@ -5,3 +5,4 @@ input/
 functions/__pycache__
 .ipynb_checkpoints/
 output/
+latex/
